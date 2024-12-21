@@ -1,42 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { CircleProgressBar } from './components/CircleProgress/CircleProgressBar'
-import { isPalindrome } from './utils'
+import { useRef, useState } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import { Mesh, Vector3 } from 'three';
+import Box from './Box';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      {/* <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <CircleProgressBar seconds={10}/>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div> */}
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <Canvas camera={{ position: [15, 15, 15] }}>
+      <ambientLight intensity={0.5} />
+      <spotLight
+        position={[10, 10, 10]}
+        intensity={1}
+      />
+      <pointLight
+        position={[10, 10, 10]}
+        intensity={1}
+      />
+      <Box />
 
-      <p className="read-the-docs">
-        {isPalindrome('madam madam')}
-      </p>
-    </>
-  )
-}
+      <OrbitControls enableZoom={true} />
+    </Canvas >
+  );
+};
 
-export default App
+export default App;
